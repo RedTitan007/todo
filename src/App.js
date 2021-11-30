@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import Login from './components/login/login.jsx'
+import Todo from './components/todo/todo.jsx'
+import { useSelector} from 'react-redux'
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  withRouter,
+  Redirect
+} from 'react-router-dom';
 
-function App() {
+const App=() =>{
+  const { currentUser } = useSelector(state => state.user)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path='/' component={Login} />
+          <Route exact path='/todo' component={Todo} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
-export default App;
+export default withRouter(App);
